@@ -1,9 +1,32 @@
 
+// Copyright (c) 2018 Bert Maurau
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Code inspired by William Malone (www.williammalone.com)
+// From the original JS tutorial.
+// Converted to TypeScript with small tweaks and globalization.
+
 /**
  * The passable configuration for the Sprite itself
  */
 interface SpriteOptions {
-
    width: number;
    renderWidth: number;
    height: number;
@@ -11,7 +34,6 @@ interface SpriteOptions {
    image: HTMLImageElement;
    ticksPerFrame: number;
    numberOfFrames: number;
-
 }
 
 /**
@@ -79,7 +101,6 @@ class Sprite {
          this.renderHeight);                                      // Destination height (Frame height)
    };
 
-
    /**
     * Update to the current frame
     */
@@ -98,7 +119,7 @@ class Sprite {
             // go to the next frame
             this.frameIndex += 1;
          } else {
-            this.totalLoops +=1;
+            this.totalLoops += 1;
             this.frameIndex = 0;
          }
 
@@ -125,8 +146,6 @@ class Sprite {
          ticks_per_frame: this.ticksPerFrame,
       }
    }
-
-
 }
 
 /**
@@ -157,7 +176,7 @@ class SpriteAnimation {
 
 
       // load the element for the display
-      this.feedbackElement = <HTMLDivElement> document.createElement("feedback");
+      this.feedbackElement = <HTMLDivElement>document.createElement("feedback");
       document.body.appendChild(this.feedbackElement);
 
       // load the canvas
@@ -213,7 +232,7 @@ class SpriteAnimation {
       this.feedbackElement.innerHTML = `
          <pre>${JSON.stringify(info, undefined, 2)}</pre> 
       `;
-      
+
    }
 
 }

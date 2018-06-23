@@ -1,52 +1,55 @@
 <html>
-   <base="/">
-<script>
-   // define a new image that holds our sprite
-   const image = new Image();
-   image.src = "./assets/sprites/megaman-jump.png";
-   //image.src = "./assets/sprites/rotating-coin.png";
-   //image.src = "./assets/sprites/capguy-walk.png";
-</script>
+<base="/">
+   <script>
+      // define a new image that holds our sprite
+      const image = new Image();
+      //image.src = "./assets/sprites/megaman-jump.png";
+      //image.src = "./assets/sprites/rotating-coin.png";
+      image.src = "./assets/sprites/capguy-walk.png";
+   </script>
 
-<body style="text-align: center;">
-</body>
+   <body style="text-align: center;">
+   </body>
 
-<!-- include the actual application -->
-<script src="./polyfills.js"></script>
-<script src="./index.js"></script>
+   <!-- include the actual application -->
+   <script src="./polyfills.js"></script>
+   <script src="./index.js"></script>
 
-<script>
+   <script>
 
-   console.log('Loading new SpriteAnimation..');
+      console.log('Loading new SpriteAnimation..');
 
-   // init a new app with given image
-   let app = new SpriteAnimation();
-   /*
-   let optionsCoin = {
-      ticksPerFrame: 4, 
-      numberOfFrames: 10,
-      renderWidth: 300,
-      renderHeight: 300,
-   }
-   app.load(image, 1000, 100, optionsMegaman);
+      // init a new app with given image
+      let app = new SpriteAnimation();
+      /*
+      let optionsCoin = {
+         ticksPerFrame: 4, 
+         numberOfFrames: 10,
+         renderWidth: 300,
+         renderHeight: 300,
+      }
+      app.load(image, 1000, 100, optionsMegaman);
+      let optionsMegaman = {
+         ticksPerFrame: 5, 
+         numberOfFrames: 7,
+         renderWidth: 56,
+         renderHeight: 140,
+      }
+      app.load(image, 550, 144, optionsMegaman);
+      */
+      let optionsCapguy = {
+         ticksPerFrame: 4,    // how long each frame should be visible
+         numberOfFrames: 8,   // total number of frames in your sprite
+         renderWidth: 147,    // the render width (result width)
+         renderHeight: 325,   // the render height (result height)
+      }
 
-   let optionsCapguy = {
-      ticksPerFrame: 4, 
-      numberOfFrames: 10,
-      renderWidth: 300,
-      renderHeight: 300,
-   }
-   app.load(image, 1000, 100, optionsMegaman);
-   */
-   let optionsMegaman = {
-      ticksPerFrame: 2, 
-      numberOfFrames: 7,
-      renderWidth: 300,
-      renderHeight: 600,
-   }
-   app.load(image, 561, 144, optionsMegaman);
+      // 1- The Image object
+      // 2- The sprite full image width
+      // 3- The sprite full image height
+      // 4- The options
+      app.load(image, 1472, 325, optionsCapguy);
 
-   
-</script>
+   </script>
 
 </html>
