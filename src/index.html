@@ -3,10 +3,12 @@
 <script>
    // define a new image that holds our sprite
    const image = new Image();
-   image.src = "./assets/sprites/rotating-coin.png";
+   image.src = "./assets/sprites/megaman-jump.png";
+   //image.src = "./assets/sprites/rotating-coin.png";
+   //image.src = "./assets/sprites/capguy-walk.png";
 </script>
 
-<body>
+<body style="text-align: center;">
 </body>
 
 <!-- include the actual application -->
@@ -19,14 +21,32 @@
 
    // init a new app with given image
    let app = new SpriteAnimation();
-   let options = {
+   /*
+   let optionsCoin = {
       ticksPerFrame: 4, 
       numberOfFrames: 10,
       renderWidth: 300,
       renderHeight: 300,
    }
-   app.load(image, 1000, 100, options);
+   app.load(image, 1000, 100, optionsMegaman);
 
+   let optionsCapguy = {
+      ticksPerFrame: 4, 
+      numberOfFrames: 10,
+      renderWidth: 300,
+      renderHeight: 300,
+   }
+   app.load(image, 1000, 100, optionsMegaman);
+   */
+   let optionsMegaman = {
+      ticksPerFrame: 2, 
+      numberOfFrames: 7,
+      renderWidth: 300,
+      renderHeight: 600,
+   }
+   app.load(image, 561, 144, optionsMegaman);
+
+   
 </script>
 
 </html>
