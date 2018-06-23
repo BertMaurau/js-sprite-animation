@@ -14,15 +14,18 @@
 <script src="./index.js"></script>
 
 <script>
-(function () {
 
    console.log('Loading new SpriteAnimation..');
 
    // init a new app with given image
    let app = new SpriteAnimation();
-   app.load(image, 1000, 100, 4, 10).render();
-
-}());
+   let options = {
+      ticksPerFrame: 4, 
+      numberOfFrames: 10,
+      renderWidth: 300,
+      renderHeight: 300,
+   }
+   app.load(image, 1000, 100, options);
 
 </script>
 
