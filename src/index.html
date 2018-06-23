@@ -1,0 +1,29 @@
+<html>
+   <base="/">
+<script>
+   // define a new image that holds our sprite
+   const image = new Image();
+   image.src = "./assets/sprites/rotating-coin.png";
+</script>
+
+<body>
+</body>
+
+<!-- include the actual application -->
+<script src="./polyfills.js"></script>
+<script src="./index.js"></script>
+
+<script>
+(function () {
+
+   console.log('Loading new SpriteAnimation..');
+
+   // init a new app with given image
+   let app = new SpriteAnimation();
+   app.load(image, 1000, 100, 4, 10).render();
+
+}());
+
+</script>
+
+</html>

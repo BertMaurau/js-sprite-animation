@@ -1,0 +1,25 @@
+{
+  "name": "js-sprite-animation",
+  "version": "1.0.0",
+  "description": "Simple JavaScript Sprite Animation",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-html && npm run copy-others ",
+    "copy-html": "ncp ./src/index.html ./dist/index.html",
+    "copy-others": "ncp ./src/polyfills.js ./dist/polyfills.js && ncp ./src/assets ./dist/assets",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "sprite",
+    "animation",
+    "render"
+  ],
+  "author": "Bert Maurau",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "ncp": "^2.0.0",
+    "typescript": "^2.9.2"
+  }
+}
