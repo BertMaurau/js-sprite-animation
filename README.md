@@ -12,9 +12,9 @@ Same as the src/index.html
 
 // define a new image that holds our sprite
 const image = new Image();
-//image.src = "./assets/sprites/megaman-jump.png";
-//image.src = "./assets/sprites/rotating-coin.png";
-image.src = "./assets/sprites/capguy-walk.png";
+//image.src = "./assets/images/megaman-jump.png";
+//image.src = "./assets/images/rotating-coin.png";
+image.src = "./assets/images/capguy-walk.png";
 
 // init a new app with given image
 let app = new SpriteAnimation();
@@ -32,6 +32,14 @@ let optionsCapguy = {
 // 3- The sprite full image height
 // 4- The options
 app.load(image, 1472, 325, optionsCapguy);
+
+
+// ..
+// functions
+// app.play();
+// app.frame(direction +/- 1);
+// app.pause();
+// app,toggleSlomo();
 
 ```
 
