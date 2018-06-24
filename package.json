@@ -4,9 +4,10 @@
   "description": "Simple JavaScript Sprite Animation",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && npm run copy-html && npm run copy-others ",
+    "build": "tsc && npm run copy-html && npm run copy-others && npm run gen-minified",
     "copy-html": "ncp ./src/index.html ./dist/index.html",
-    "copy-others": "ncp ./src/polyfills.js ./dist/polyfills.js && ncp ./src/assets ./dist/assets",
+    "copy-others": "ncp ./src/polyfills.js ./dist/polyfills.js && ncp ./src/assets ./dist/assets && ncp ./src/lib ./dist/lib",
+    "gen-minified": "uglifyjs ./dist/index.js --output ./dist/index.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -20,6 +21,7 @@
   "dependencies": {},
   "devDependencies": {
     "ncp": "^2.0.0",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "uglify-es": "^3.3.9"
   }
 }
