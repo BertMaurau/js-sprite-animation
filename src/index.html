@@ -1,55 +1,128 @@
-<html>
-<base="/">
-   <script>
-      // define a new image that holds our sprite
-      const image = new Image();
-      //image.src = "./assets/sprites/megaman-jump.png";
-      //image.src = "./assets/sprites/rotating-coin.png";
-      image.src = "./assets/sprites/capguy-walk.png";
-   </script>
+<!doctype html>
+<html lang="en">
 
-   <body style="text-align: center;">
-   </body>
+<head>
+   <title>Sprite Animator</title>
+   <base="/">
 
-   <!-- include the actual application -->
-   <script src="./polyfills.js"></script>
-   <script src="./index.js"></script>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-   <script>
+      <!-- Meta Tags -->
+      <meta description="A simple Sprite Animator">
+      <meta name="author" content="Bert Maurau">
+      <meta name="robots" content="index, follow">
+      <meta name="revisit-after" content="3 month">
 
-      console.log('Loading new SpriteAnimation..');
+      <!-- OG Tags-->
+      <meta property="og:description" content="A simple Sprite Animator." />
+      <meta property="og:url" content="https://bertmaurau.be" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="https://bertmaurau.be/images/bertmaurau.png" />
 
-      // init a new app with given image
-      let app = new SpriteAnimation();
-      /*
-      let optionsCoin = {
-         ticksPerFrame: 4, 
-         numberOfFrames: 10,
-         renderWidth: 300,
-         renderHeight: 300,
-      }
-      app.load(image, 1000, 100, optionsMegaman);
-      let optionsMegaman = {
-         ticksPerFrame: 5, 
-         numberOfFrames: 7,
-         renderWidth: 56,
-         renderHeight: 140,
-      }
-      app.load(image, 550, 144, optionsMegaman);
-      */
-      let optionsCapguy = {
-         ticksPerFrame: 4,    // how long each frame should be visible
-         numberOfFrames: 8,   // total number of frames in your sprite
-         renderWidth: 147,    // the render width (result width)
-         renderHeight: 325,   // the render height (result height)
-      }
+      <!-- Twitter Tags -->
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content="Bert Maurau - Sprite Animator" />
+      <meta name="twitter:description" content="A simple Sprite Animator." />
+      <meta name="twitter:url" content="https://bertmaurau.be" />
+      <meta name="twitter:image" content="https://bertmaurau.be/images/bertmaurau.png" />
 
-      // 1- The Image object
-      // 2- The sprite full image width
-      // 3- The sprite full image height
-      // 4- The options
-      app.load(image, 1472, 325, optionsCapguy);
+      <!-- Dependency Stylesheets -->
+      <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/css/styles.css">
+      <style>
+         html,
+         body {
+            height: 100%;
+         }
+      </style>
+</head>
+<script>
+   // define a new image that holds our sprite
+   const image = new Image();
+   //image.src = "./assets/sprites/megaman-jump.png";
+   //image.src = "./assets/sprites/rotating-coin.png";
+   image.src = "./assets/sprites/capguy-walk.png";
+</script>
 
-   </script>
+<body>
+   <!-- Container -->
+   <div class="container align-self-center">
+
+      <!-- Header part -->
+      <div class="row justify-content-sm-center mb-4 mt-4">
+         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 text-center">
+            <h1 class="display-4">Sprite Animator</h1>
+            <hr>
+            <p class="lead">Animate and control a basic sprite based on given frames, size and image.</p>
+         </div>
+      </div>
+      <!-- / Header -->
+
+      <!-- Display -->
+      <div class="row justify-content-sm-center mb-4" id="frameDisplay">
+
+      </div>
+
+      <!-- Controls -->
+      <div class="row justify-content-sm-center mb-4">
+         <div class="col-5">
+            <div class="slider-container d-flex justify-content-center mb-4">
+               <input type="range" min="0" max="10" value="0" class="slider" id="frameSlider">
+            </div>
+            <div class="controls-container d-flex justify-content-center">
+               <button id="prevFrame">Prev. Frame</button>
+               <button id="prevFrame">Pause</button>
+               <button id="prevFrame">Play</button>
+               <button id="prevFrame">Next Frame</button>
+            </div>
+         </div>
+
+
+      </div>
+   </div>
+</body>
+
+<!-- include the actual application -->
+<script src="./polyfills.js"></script>
+<script src="./index.js"></script>
+
+<script>
+
+   console.log('Loading new SpriteAnimation..');
+
+   // init a new app with given image
+   let app = new SpriteAnimation();
+   /*
+   let optionsCoin = {
+      ticksPerFrame: 4, 
+      numberOfFrames: 10,
+      renderWidth: 300,
+      renderHeight: 300,
+   }
+   app.load(image, 1000, 100, optionsMegaman);
+   let optionsMegaman = {
+      ticksPerFrame: 5, 
+      numberOfFrames: 7,
+      renderWidth: 56,
+      renderHeight: 140,
+   }
+   app.load(image, 550, 144, optionsMegaman);
+   */
+   let optionsCapguy = {
+      ticksPerFrame: 4,    // how long each frame should be visible
+      numberOfFrames: 8,   // total number of frames in your sprite
+      renderWidth: 147,    // the render width (result width)
+      renderHeight: 325,   // the render height (result height)
+   }
+
+   // 1- The Image object
+   // 2- The sprite full image width
+   // 3- The sprite full image height
+   // 4- The options
+   app.load(image, 1472, 325, optionsCapguy);
+
+</script>
 
 </html>
