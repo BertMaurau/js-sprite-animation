@@ -61,32 +61,59 @@
       <!-- / Header -->
 
       <!-- Display -->
+      <div class="row justify-content-sm-center mb-4">
+         <div class="col-5">
+            <img id="spriteDisplay" class="img-fluid">
+         </div>
+      </div>
       <div class="row justify-content-sm-center mb-4" id="frameDisplay">
 
       </div>
 
       <!-- Controls -->
       <div class="row justify-content-sm-center mb-4">
-         <div class="col-5">
+         <div class="col-6">
             <div class="slider-container d-flex justify-content-center mb-4">
                <input type="range" min="0" max="10" value="0" class="slider" id="frameSlider">
             </div>
             <div class="controls-container d-flex justify-content-center">
-               <button id="prevFrame">Prev. Frame</button>
-               <button id="prevFrame">Pause</button>
-               <button id="prevFrame">Play</button>
-               <button id="prevFrame">Next Frame</button>
+               <button id="prevFrame" onclick="app.frame(-1);">Prev. Frame</button>
+               <button id="prevFrame" onclick="app.pause();">Pause</button>
+               <button id="prevFrame" onclick="app.play();">Play</button>
+               <button id="prevFrame" onclick="app.frame(+1);">Next Frame</button>
+               <button id="prevFrame" onclick="app.toggleSlomo();">Toggle Slo-mo</button>
             </div>
          </div>
-
-
       </div>
+
+      <!-- Output -->
+      <div class="row justify-content-sm-center mb-4">
+         <div class="col-12" id="output" style="word-wrap: break-word;">
+         </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="row justify-content-sm-center mb-4 mt-4">
+         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 text-center">
+            <hr>
+            <small>Bert Maurau 2018
+               <br>
+               <a href="https://bertmaurau.be">www.bertmaurau.be</a>
+               <br>Contact:
+               <a href="mailto:hello@bertmaurua.be">hello@bertmaurau.be</a>
+            </small>
+         </div>
+      </div>
+      <!-- / Footer-->
    </div>
+   <!-- / Container -->
+
 </body>
 
-<!-- include the actual application -->
-<script src="./polyfills.js"></script>
-<script src="./index.js"></script>
+<!-- Main scripts -->
+
+<script type="text/javascript" src="./polyfills.js"></script>
+<script type="text/javascript" src="./index.min.js"></script>
 
 <script>
 

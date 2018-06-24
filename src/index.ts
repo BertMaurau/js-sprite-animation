@@ -56,6 +56,7 @@ class Sprite {
    private frameIndex: number = 0;
    private tickCount: number = 0;
    private ticksPerFrame: number = 5;
+   private currentTicksPerFrame: number = 5;
    private numberOfFrames: number = 1;
 
    /**
@@ -72,6 +73,7 @@ class Sprite {
       this.height = options.height;
       this.renderHeight = options.renderHeight;
       this.ticksPerFrame = options.ticksPerFrame;
+      this.currentTicksPerFrame = options.ticksPerFrame;
       this.numberOfFrames = options.numberOfFrames;
 
       // set the image
@@ -109,23 +111,69 @@ class Sprite {
       this.tickCount += 1;
       this.totalTicks += 1;
 
-      if (this.tickCount > this.ticksPerFrame) {
-
-         this.tickCount = 0;
-         this.totalFrames += 1;
-
-         // if the current frame index is in range
-         if (this.frameIndex < (this.numberOfFrames - 1)) {
-            // go to the next frame
-            this.frameIndex += 1;
-         } else {
-            this.totalLoops += 1;
-            this.frameIndex = 0;
-         }
-
+      if (this.tickCount > this.currentTicksPerFrame) {
+         // show next frame
+         this.nextFrame();
       }
 
    };
+
+   /**
+    * Set the current frame
+    * @param {number} frameIndex 
+    */
+   public setFrame(frameIndex: number): void {
+      this.frameIndex = frameIndex;
+
+      this.render();
+   }
+
+   /**
+    * Get the next frame
+    */
+   public nextFrame(): void {
+
+      this.tickCount = 0;
+      this.totalFrames += 1;
+
+      // if the current frame index is in range
+      if (this.frameIndex < (this.numberOfFrames - 1)) {
+         // go to the next frame
+         this.frameIndex += 1;
+      } else {
+         this.totalLoops += 1;
+         this.frameIndex = 0;
+      }
+
+      this.render();
+   }
+
+   /**
+    * Get the previous frame
+    */
+   public prevFrame(): void {
+
+      this.tickCount = 0;
+      this.totalFrames -= 1;
+
+      // if the current frame index is not the first
+      if (this.frameIndex > 0) {
+         // go to the previous frame
+         this.frameIndex -= 1;
+      } else {
+         this.totalLoops -= 1;
+         this.frameIndex = (this.numberOfFrames - 1);
+      }
+
+      this.render();
+   }
+
+   /**
+    * Toggle slow-motion by increasing ticks per frame needed
+    */
+   public toggleSlomo(): void {
+      this.currentTicksPerFrame = (this.currentTicksPerFrame === this.ticksPerFrame) ? this.ticksPerFrame * 3 : this.ticksPerFrame; 
+   }
 
    /**
     * Return the basic information
@@ -155,6 +203,9 @@ class SpriteAnimation {
 
    // the div that holds the info
    private feedbackElement: HTMLDivElement;
+   private frameDisplay: HTMLDivElement;
+   private sliderObject: HTMLInputElement;
+   private spriteDisplay: HTMLImageElement;
    // the image object
    private image: HTMLImageElement;
    // the canvas used for rendering the sprite
@@ -165,6 +216,8 @@ class SpriteAnimation {
    private fps: number = 60;
    // the gameloop
    private gameLoop;
+   // animation auto-play
+   private isPlaying: Boolean = false;
 
    /**
     * Load the actual animation with given sprite image
@@ -174,17 +227,35 @@ class SpriteAnimation {
     */
    public load(image: HTMLImageElement, width: number, height: number, options: any): SpriteAnimation {
 
+      // load the element for the slider
+      this.sliderObject = <HTMLInputElement>document.getElementById("frameSlider");
+      this.sliderObject.max = String((options.numberOfFrames - 1));
+      this.sliderObject.min = '0';
+      this.sliderObject.onchange = () => {
 
-      // load the element for the display
-      this.feedbackElement = <HTMLDivElement>document.createElement("feedback");
-      document.body.appendChild(this.feedbackElement);
+         // set the frame the the selected slider point
+         this.sprite.setFrame(parseInt(this.sliderObject.value));
+
+         // render the actual frame
+         this.sprite.render();
+
+         // update the totals visual
+         this.updateFeedback();
+     }​
+
+      // load the element for the sprite display
+      this.frameDisplay = <HTMLDivElement>document.getElementById("frameDisplay");
+      this.spriteDisplay = <HTMLImageElement>document.getElementById("spriteDisplay");
+      this.spriteDisplay.src = image.src;
+      // load the element for the feedback display
+      this.feedbackElement = <HTMLDivElement>document.getElementById("output");
 
       // load the canvas
       this.canvas = <HTMLCanvasElement>document.createElement("canvas");
       this.canvas.width = (options.renderWidth || width);
       this.canvas.height = (options.renderHeight || height);
       // add the canvas to the body
-      document.body.appendChild(this.canvas);
+      this.frameDisplay.appendChild(this.canvas);
 
       // set the images for future access
       this.image = image;
@@ -200,6 +271,7 @@ class SpriteAnimation {
          numberOfFrames: options.numberOfFrames,
       }
       this.sprite = new Sprite(this.canvas.getContext("2d"), spriteOptions);
+      this.sprite.update();
 
       /**
        * The gameloop to take care of the updates
@@ -208,13 +280,16 @@ class SpriteAnimation {
 
          window.requestAnimationFrame(this.gameLoop);
 
-         // calculate new frame to show
-         this.sprite.update();
-         // render the actual frame
-         this.sprite.render();
+         if (this.isPlaying) {
+            // calculate new frame to show
+            this.sprite.update();
+            // render the actual frame
+            this.sprite.render();
 
-         // do other stuff here
-         this.updateFeedback();
+            // do other stuff here
+            this.updateFeedback();
+         }
+
       }
 
       // start the game loop as soon as the sprite sheet is loaded
@@ -224,13 +299,54 @@ class SpriteAnimation {
    }
 
    /**
+    * Start the animation
+    */
+   public play(): void {
+      this.isPlaying = true;
+   }
+
+   /**
+    * Pause the animation
+    */
+   public pause(): void {
+      this.isPlaying = false;
+   }
+
+   /**
+    * Handle frame manipulation
+    * @param {number} direction 
+    */
+   public frame(direction: number): void {
+      if (direction > 0) {
+         this.sprite.nextFrame();
+      } else {
+         this.sprite.prevFrame();
+      }
+
+      // update the totals visual
+      this.updateFeedback();
+   }
+
+   /**
+    * Toggle slow-motion option
+    */
+   public toggleSlomo(): void {
+      this.sprite.toggleSlomo();
+   }
+
+   /**
     * Update the div with the information
     */
    private updateFeedback(): void {
 
+      // get all the info
       let info = this.sprite.getAnimationInfo();
+
+      // set the slider value
+      this.sliderObject.value = info.current_frame;
+
       this.feedbackElement.innerHTML = `
-         <pre>${JSON.stringify(info, undefined, 2)}</pre> 
+         <small>${JSON.stringify(info)}</small>
       `;
 
    }
